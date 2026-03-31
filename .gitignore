@@ -1,0 +1,6 @@
+MacroLibX/
+libft/
+.build/
+compile_commands.json
+.cache
+cub3D
