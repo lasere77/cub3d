@@ -1,7 +1,10 @@
 CC=cc
 NAME = cub3D
 SRCS_DIR = srcs/
-SOURCES =	cub3d.c		\
+SOURCES =	cub3d.c			\
+			event/event.c	\
+			raycasting.c	\
+			error.c			\
 
 SOURCES	:=	$(addprefix $(SRCS_DIR), $(SOURCES))
 
