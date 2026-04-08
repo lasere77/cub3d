@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:40:20 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 11:20:17 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/08 17:12:04 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	panic(char *msg, t_mlx *mlx, int exit_code)
 {
 	if (msg)
-		printf("%s\n", msg);
+		printf("Error\n%s\n", msg);
 	if (mlx)
 	{
 		if (mlx->win)

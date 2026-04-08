@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 11:17:42 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/08 18:07:34 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include "mlx_extended.h"
 
 #include "cub.h"
 #include "raycasting.h"
 #include "event.h"
 #include "error.h"
+#include "libft.h"
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -51,7 +53,7 @@ int	worldMap[MAP_WIDTH][MAPHEIGHT] =
 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
 
-static void	check_resolution(t_mlx *mlx)
+void	check_resolution(t_mlx *mlx)
 {
 	int	h;
 	int	w;
@@ -67,27 +69,32 @@ static void	check_resolution(t_mlx *mlx)
 		if (!mlx->screen.img)
 			panic("Error creating image.", mlx, 1);
 		printf("resize\n");
-		}
+	}
 }
 
 void	draw(t_mlx *mlx, int x, int h, mlx_color color)
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			i;
+	mlx_color	*color_tab;
 
 	line_height = h / mlx->ray.ray_dist;
-	draw_start = -line_height / 2 + h / 2;
-	draw_end = line_height / 2 + h / 2;
+	draw_start = (-line_height >> 1) + (h >> 1);
+	draw_end = (line_height >> 1) + (h >> 1);
 	if (draw_start < 0)
 		draw_start = 0;
 	if (draw_end >= h)
 		draw_end = h - 1;
-	check_resolution(mlx);
-	while (draw_start < draw_end)
-		mlx_set_image_pixel(mlx->mlx, mlx->screen.img, x, draw_start++, color);
-	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x334D4DFF});
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);
+	color_tab = malloc(sizeof(mlx_color) * (draw_end - draw_start));
+	if (!color_tab)
+		panic("Memory alloc failed.\n", mlx, 1);
+	i = 0;
+	while (i < draw_end - draw_start)
+		color_tab[i++] = color;
+	mlx_set_image_region(mlx->mlx, mlx->screen.img, x, draw_start, 1, draw_end - draw_start, color_tab);
+	free(color_tab);
 }
 
 mlx_color	get_color(int mapX, int mapY, int side)
@@ -106,7 +113,7 @@ mlx_color	get_color(int mapX, int mapY, int side)
 		color.rgba = 255 << 16 | 255 << 8 | 255;
 	else
 		color.rgba = 255 << 16 | 150 << 8 | 20;
-	if (side == 1)
+	if (side == 1/* && worldMap[mapX][mapY] != 1*/)
 		color.rgba = color.rgba / 2;
 	return (color);
 }

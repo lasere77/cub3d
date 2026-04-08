@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 11:20:12 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/08 18:17:07 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <math.h>
 
 void	calculate_data_dda(t_mlx *mlx, int mapX, int mapY)
 {
 	if (mlx->ray.ray_dir_x == 0)
 		mlx->ray.delta_x = 1e30;
 	else
-		mlx->ray.delta_x = D_ABS(1 / mlx->ray.ray_dir_x);
+		mlx->ray.delta_x = fabs(1 / mlx->ray.ray_dir_x);
 	if (mlx->ray.ray_dir_y == 0)
 		mlx->ray.delta_y = 1e30;
 	else
-		mlx->ray.delta_y = D_ABS(1 / mlx->ray.ray_dir_y);
+		mlx->ray.delta_y = fabs(1 / mlx->ray.ray_dir_y);
 	if (mlx->ray.ray_dir_x < 0)
 		mlx->ray.side_x = (mlx->player.pos_x - mapX) * mlx->ray.delta_x;
 	else
@@ -69,7 +70,8 @@ void	update(void *param)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)param;
-	mlx_get_window_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
+	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x334D4DFF});
+	check_resolution(mlx);
 	x = 0;
 	while (x < mlx->screen.w)
 	{
@@ -85,4 +87,5 @@ void	update(void *param)
 		draw(mlx, x, mlx->screen.h, get_color(map_x, map_y, side));
 		x++;
 	}
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);
 }
