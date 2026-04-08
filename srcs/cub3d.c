@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 18:07:34 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:32:02 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ void	check_resolution(t_mlx *mlx)
 	int	w;
 
 	mlx_get_window_size(mlx->mlx, mlx->win, &w, &h);
-	if (w != mlx->screen.w || h != mlx->screen.h || !mlx->screen.img)
+	if (w != mlx->screen.w || h != mlx->screen.h || !mlx->screen.img || !mlx->screen.color_tab)
 	{
+		mlx->screen.color_tab = ft_calloc(sizeof(mlx_color), h);
+		if (!mlx->screen.color_tab)
+			panic("Memory alloc failed.\n", mlx, 1);
 		mlx->screen.h = h;
 		mlx->screen.w = w;
 		if (mlx->screen.img)
@@ -78,7 +81,6 @@ void	draw(t_mlx *mlx, int x, int h, mlx_color color)
 	int			draw_start;
 	int			draw_end;
 	int			i;
-	mlx_color	*color_tab;
 
 	line_height = h / mlx->ray.ray_dist;
 	draw_start = (-line_height >> 1) + (h >> 1);
@@ -87,14 +89,10 @@ void	draw(t_mlx *mlx, int x, int h, mlx_color color)
 		draw_start = 0;
 	if (draw_end >= h)
 		draw_end = h - 1;
-	color_tab = malloc(sizeof(mlx_color) * (draw_end - draw_start));
-	if (!color_tab)
-		panic("Memory alloc failed.\n", mlx, 1);
 	i = 0;
 	while (i < draw_end - draw_start)
-		color_tab[i++] = color;
-	mlx_set_image_region(mlx->mlx, mlx->screen.img, x, draw_start, 1, draw_end - draw_start, color_tab);
-	free(color_tab);
+		mlx->screen.color_tab[i++] = color;
+	mlx_set_image_region(mlx->mlx, mlx->screen.img, x, draw_start, 1, draw_end - draw_start, mlx->screen.color_tab);
 }
 
 mlx_color	get_color(int mapX, int mapY, int side)
@@ -135,6 +133,10 @@ static inline void	init_window(t_mlx *mlx)
 		panic("Error creating windows.", mlx, 1);
 	mlx_get_window_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
 }
+
+/*
+malloc in draw;
+*/
 
 int	main(void)
 {

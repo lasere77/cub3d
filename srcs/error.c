@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:40:20 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 17:12:04 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/08 18:31:20 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	panic(char *msg, t_mlx *mlx, int exit_code)
 			mlx_destroy_image(mlx->mlx, mlx->screen.img);
 		if (mlx->mlx)
 			mlx_destroy_context(mlx->mlx);
+		free(mlx->screen.color_tab);
 	}
 	exit(exit_code);
 }
