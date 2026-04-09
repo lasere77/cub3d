@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 18:32:02 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/09 11:38:54 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 int	worldMap[MAP_WIDTH][MAPHEIGHT] =
 {
@@ -52,28 +51,6 @@ int	worldMap[MAP_WIDTH][MAPHEIGHT] =
 {1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
-
-void	check_resolution(t_mlx *mlx)
-{
-	int	h;
-	int	w;
-
-	mlx_get_window_size(mlx->mlx, mlx->win, &w, &h);
-	if (w != mlx->screen.w || h != mlx->screen.h || !mlx->screen.img || !mlx->screen.color_tab)
-	{
-		mlx->screen.color_tab = ft_calloc(sizeof(mlx_color), h);
-		if (!mlx->screen.color_tab)
-			panic("Memory alloc failed.\n", mlx, 1);
-		mlx->screen.h = h;
-		mlx->screen.w = w;
-		if (mlx->screen.img)
-			mlx_destroy_image(mlx->mlx, mlx->screen.img);
-		mlx->screen.img = mlx_new_image(mlx->mlx, w, h);
-		if (!mlx->screen.img)
-			panic("Error creating image.", mlx, 1);
-		printf("resize\n");
-	}
-}
 
 void	draw(t_mlx *mlx, int x, int h, mlx_color color)
 {
@@ -125,18 +102,20 @@ static inline void	init_window(t_mlx *mlx)
 	if (!mlx->mlx)
 		panic("Failed to load MacroLibX.", NULL, 1);
 	info.title = "cub3D";
-	info.is_resizable = true;
-	info.height = 1080;
-	info.width = 1920;
+	info.is_resizable = false;
+	info.is_fullscreen = true;
 	mlx->win = mlx_new_window(mlx->mlx, &info);
 	if (!mlx->win)
 		panic("Error creating windows.", mlx, 1);
-	mlx_get_window_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
+	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
+	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
+	mlx->screen.color_tab = ft_calloc(sizeof(mlx_color), mlx->screen.h);
+	if (!mlx->screen.color_tab)
+		panic("Memory alloc failed.\n", mlx, 1);
+	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.w, mlx->screen.h);
+	if (!mlx->screen.img)
+		panic("Error creating image.", mlx, 1);
 }
-
-/*
-malloc in draw;
-*/
 
 int	main(void)
 {
