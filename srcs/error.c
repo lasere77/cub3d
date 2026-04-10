@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:40:20 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 18:31:20 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 16:19:40 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	panic(char *msg, t_mlx *mlx, int exit_code)
 		if (mlx->mlx)
 			mlx_destroy_context(mlx->mlx);
 		free(mlx->screen.color_tab);
+		free(mlx->screen.wallpaper);
 	}
 	exit(exit_code);
 }

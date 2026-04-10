@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 13:19:04 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 16:44:44 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 
+#include <stdbool.h>
 # include <stdint.h>
 # include <stddef.h>
 # include <sys/time.h>
@@ -43,8 +44,10 @@ typedef struct s_screen
 {
 	mlx_image	img;
 	mlx_color	*color_tab;
+	mlx_color	*wallpaper;
 	int			w;
 	int			h;
+	bool		need_redraw;
 }				t_screen;
 
 typedef struct s_ray

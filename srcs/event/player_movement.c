@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:09:33 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 16:12:21 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 17:00:54 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	left_rotation(t_mlx *mlx)
 	p->dir_y = old_dir_x * sin(p->rot_speed) + p->dir_y * cos(p->rot_speed);
 	p->plane_x = p->plane_x * cos(p->rot_speed) - p->plane_y * sin(p->rot_speed);
 	p->plane_y = old_plane_x * sin(p->rot_speed) + p->plane_y * cos(p->rot_speed);
+	mlx->screen.need_redraw = true;
 }
 
 void	right_rotation(t_mlx *mlx)
@@ -42,6 +43,7 @@ void	right_rotation(t_mlx *mlx)
 	p->dir_y = old_dir_x * sin(-p->rot_speed) + p->dir_y * cos(-p->rot_speed);
 	p->plane_x = p->plane_x * cos(-p->rot_speed) - p->plane_y * sin(-p->rot_speed);
     p->plane_y = old_plane_x * sin(-p->rot_speed) + p->plane_y * cos(-p->rot_speed);
+	mlx->screen.need_redraw = true;
 }
 
 void	move_forward(t_mlx *mlx)
@@ -53,6 +55,7 @@ void	move_forward(t_mlx *mlx)
 		p->pos_x += p->dir_x * p->move_speed;
     if (worldMap[(int)p->pos_x][(int)(p->pos_y + p->dir_y * p->move_speed)] == 0)
 		p->pos_y += p->dir_y * p->move_speed;
+	mlx->screen.need_redraw = true;
 }
 
 void	move_backward(t_mlx *mlx)
@@ -64,4 +67,5 @@ void	move_backward(t_mlx *mlx)
 		p->pos_x -= p->dir_x * p->move_speed;
     if (worldMap[(int)p->pos_x][(int)(p->pos_y - p->dir_y * p->move_speed)] == 0)
 		p->pos_y -= p->dir_y * p->move_speed;
+	mlx->screen.need_redraw = true;
 }

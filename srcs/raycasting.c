@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 13:38:26 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 16:52:25 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx_extended.h"
 
 #include <math.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 
@@ -65,18 +66,6 @@ int	dda(t_mlx *mlx, int *mapX, int *mapY)
 	return (side);
 }
 
-static void	clean_image(t_mlx *mlx)
-{
-	int	i;
-	
-	i = 0;
-	while (i < mlx->screen.h)
-		mlx->screen.color_tab[i++] = (mlx_color) { .rgba = 0 };
-	i = 0;
-	while (i < mlx->screen.w)
-		mlx_set_image_region(mlx->mlx, mlx->screen.img, i++, 0, 1, mlx->screen.h, mlx->screen.color_tab);
-}
-
 static void	set_speed_from_frame_time(t_mlx *mlx)
 {
 	struct timeval	end;
@@ -99,23 +88,27 @@ void	update(void *param)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)param;
-	clean_image(mlx);
-	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x334D4DFF});
-	x = 0;
-	while (x < mlx->screen.w)
+	if (mlx->screen.need_redraw)
 	{
-		mlx->ray.camera_x = 2 * x / (double)mlx->screen.w - 1;
-		mlx->ray.ray_dir_x = mlx->player.plane_x * mlx->ray.camera_x;
-		mlx->ray.ray_dir_x += mlx->player.dir_x;
-		mlx->ray.ray_dir_y = mlx->player.plane_y * mlx->ray.camera_x;
-		mlx->ray.ray_dir_y += mlx->player.dir_y;
-		map_x = mlx->player.pos_x;
-		map_y = mlx->player.pos_y;
-		calculate_data_dda(mlx, map_x, map_y);
-		side = dda(mlx, &map_x, &map_y);
-		draw(mlx, x, mlx->screen.h, get_color(map_x, map_y, side));
-		x++;
+		mlx_set_image_region(mlx->mlx, mlx->screen.img, 0, 0, mlx->screen.w, mlx->screen.h, mlx->screen.wallpaper);
+		mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x334D4DFF});
+		x = 0;
+		while (x < mlx->screen.w)
+		{
+			mlx->ray.camera_x = 2 * x / (double)mlx->screen.w - 1;
+			mlx->ray.ray_dir_x = mlx->player.plane_x * mlx->ray.camera_x;
+			mlx->ray.ray_dir_x += mlx->player.dir_x;
+			mlx->ray.ray_dir_y = mlx->player.plane_y * mlx->ray.camera_x;
+			mlx->ray.ray_dir_y += mlx->player.dir_y;
+			map_x = mlx->player.pos_x;
+			map_y = mlx->player.pos_y;
+			calculate_data_dda(mlx, map_x, map_y);
+			side = dda(mlx, &map_x, &map_y);
+			draw(mlx, x, mlx->screen.h, get_color(map_x, map_y, side));
+			x++;
+		}
+		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);	
+		mlx->screen.need_redraw = false;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);	
 	set_speed_from_frame_time(mlx);
 }

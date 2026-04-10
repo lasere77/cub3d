@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 13:34:02 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 16:58:21 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include "raycasting.h"
 #include "event.h"
 #include "error.h"
-#include "libft.h"
 
+#include <stdlib.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -109,12 +109,16 @@ static inline void	init_window(t_mlx *mlx)
 		panic("Error creating windows.", mlx, 1);
 	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
 	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
-	mlx->screen.color_tab = ft_calloc(sizeof(mlx_color), mlx->screen.h);
+	mlx->screen.color_tab = malloc(sizeof(mlx_color) * mlx->screen.h);
 	if (!mlx->screen.color_tab)
+		panic("Memory alloc failed.\n", mlx, 1);
+	mlx->screen.wallpaper = malloc(sizeof(mlx_color) * mlx->screen.w * mlx->screen.h);
+	if (!mlx->screen.wallpaper)
 		panic("Memory alloc failed.\n", mlx, 1);
 	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.w, mlx->screen.h);
 	if (!mlx->screen.img)
 		panic("Error creating image.", mlx, 1);
+	mlx->screen.need_redraw = true;
 }
 
 int	main(void)
