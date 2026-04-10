@@ -6,12 +6,16 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/09 11:25:23 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 13:38:26 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "mlx_extended.h"
+
 #include <math.h>
+#include <stddef.h>
+#include <stdio.h>
 
 void	calculate_data_dda(t_mlx *mlx, int mapX, int mapY)
 {
@@ -61,6 +65,31 @@ int	dda(t_mlx *mlx, int *mapX, int *mapY)
 	return (side);
 }
 
+static void	clean_image(t_mlx *mlx)
+{
+	int	i;
+	
+	i = 0;
+	while (i < mlx->screen.h)
+		mlx->screen.color_tab[i++] = (mlx_color) { .rgba = 0 };
+	i = 0;
+	while (i < mlx->screen.w)
+		mlx_set_image_region(mlx->mlx, mlx->screen.img, i++, 0, 1, mlx->screen.h, mlx->screen.color_tab);
+}
+
+static void	set_speed_from_frame_time(t_mlx *mlx)
+{
+	struct timeval	end;
+
+	gettimeofday(&end, NULL);
+	mlx->frame_time = end.tv_sec * 1000 + end.tv_usec / 1000.0;
+	mlx->frame_time -= mlx->start.tv_sec * 1000 + mlx->start.tv_usec / 1000.0;
+	mlx->frame_time /= 1000;
+	gettimeofday(&mlx->start, NULL);
+	mlx->player.move_speed = mlx->frame_time * 5.0;
+    mlx->player.rot_speed = mlx->frame_time * 3.0;
+}
+
 void	update(void *param)
 {
 	int		x;
@@ -70,6 +99,7 @@ void	update(void *param)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)param;
+	clean_image(mlx);
 	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x334D4DFF});
 	x = 0;
 	while (x < mlx->screen.w)
@@ -86,5 +116,6 @@ void	update(void *param)
 		draw(mlx, x, mlx->screen.h, get_color(map_x, map_y, side));
 		x++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);	
+	set_speed_from_frame_time(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 18:26:06 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 13:19:04 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
 }			t_player;
 
 typedef struct s_screen
@@ -65,6 +67,7 @@ typedef struct s_mlx
 	t_screen		screen;
 	t_ray			ray;
 	struct timeval	start;
+	double			frame_time;
 }					t_mlx;
 
 mlx_color	get_color(int mapX, int mapY, int side);

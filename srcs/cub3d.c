@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/09 11:38:54 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 13:34:02 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ static inline void	init_window(t_mlx *mlx)
 
 int	main(void)
 {
-	t_mlx		mlx;
+	t_mlx	mlx;
 
 	mlx = (t_mlx){0};
-	mlx.player = (t_player){22, 12, -1, 0, 0, 0.66};
+	mlx.player = (t_player){22, 12, -1, 0, 0, 0.66, 0, 0};
 	mlx.ray = (t_ray){0};
 	init_window(&mlx);
 	mlx_set_fps_goal(mlx.mlx, FPS_GOAL);
