@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:56:31 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/09 17:59:00 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 17:54:25 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # define KEY_S 22
 # define KEY_D 7
 
-void	key_hook(int key, void *param);
-void	window_hook(int event, void *param);
+void	key_hook_up(int key, void *param);
+void	key_hook_down(int key, void *param);
+void	window_hook(int key, void *param);
 
 #endif

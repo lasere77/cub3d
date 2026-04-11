@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 16:44:44 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 09:54:13 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@
 # define MAPHEIGHT 24
 
 extern int	worldMap[MAP_WIDTH][MAPHEIGHT];
+
+typedef enum e_key_index
+{
+	KEY_ESC_INDEX,
+	KEY_F11_INDEX,
+	KEY_F12_INDEX,
+	KEY_A_INDEX,
+	KEY_W_INDEX,
+	KEY_S_INDEX,
+	KEY_D_INDEX,
+	NB_SET_KEY
+}	t_key_index;
 
 typedef struct s_player
 {
@@ -70,6 +82,7 @@ typedef struct s_mlx
 	t_screen		screen;
 	t_ray			ray;
 	struct timeval	start;
+	bool			key_tab[NB_SET_KEY];
 	double			frame_time;
 }					t_mlx;
 

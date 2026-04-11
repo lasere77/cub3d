@@ -6,12 +6,13 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 16:52:25 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 09:52:58 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "mlx_extended.h"
+#include "player_movement.h"
 
 #include <math.h>
 #include <stdbool.h>
@@ -111,4 +112,5 @@ void	update(void *param)
 		mlx->screen.need_redraw = false;
 	}
 	set_speed_from_frame_time(mlx);
+	movement(mlx);
 }

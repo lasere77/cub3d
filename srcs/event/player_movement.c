@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:09:33 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 17:00:54 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 09:52:27 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <math.h>
 
-void	left_rotation(t_mlx *mlx)
+static void	left_rotation(t_mlx *mlx)
 {
 	t_player	*p;
 	double		old_dir_x;
@@ -30,7 +30,7 @@ void	left_rotation(t_mlx *mlx)
 	mlx->screen.need_redraw = true;
 }
 
-void	right_rotation(t_mlx *mlx)
+static void	right_rotation(t_mlx *mlx)
 {
 	t_player	*p;
 	double		old_dir_x;
@@ -46,7 +46,7 @@ void	right_rotation(t_mlx *mlx)
 	mlx->screen.need_redraw = true;
 }
 
-void	move_forward(t_mlx *mlx)
+static void	move_forward(t_mlx *mlx)
 {
 	t_player	*p;
 
@@ -58,7 +58,7 @@ void	move_forward(t_mlx *mlx)
 	mlx->screen.need_redraw = true;
 }
 
-void	move_backward(t_mlx *mlx)
+static void	move_backward(t_mlx *mlx)
 {
 	t_player	*p;
 
@@ -68,4 +68,16 @@ void	move_backward(t_mlx *mlx)
     if (worldMap[(int)p->pos_x][(int)(p->pos_y - p->dir_y * p->move_speed)] == 0)
 		p->pos_y -= p->dir_y * p->move_speed;
 	mlx->screen.need_redraw = true;
+}
+
+void	movement(t_mlx *mlx)
+{
+	if (mlx->key_tab[KEY_A_INDEX])
+		left_rotation(mlx);
+	if (mlx->key_tab[KEY_W_INDEX])
+		move_forward(mlx);
+	if (mlx->key_tab[KEY_S_INDEX])
+		move_backward(mlx);
+	if (mlx->key_tab[KEY_D_INDEX])
+		right_rotation(mlx);
 }

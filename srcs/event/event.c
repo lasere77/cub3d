@@ -6,29 +6,46 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:47:29 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 16:11:37 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 09:49:38 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "event.h"
 #include "cub.h"
-#include "player_movement.h"
 
-void	key_hook(int key, void *param)
+#include <stdbool.h>
+#include <stdint.h>
+
+void	key_hook_up(int key, void *param)
+{
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *) param;
+	if (key == KEY_A)
+		mlx->key_tab[KEY_A_INDEX] = false;
+	else if (key == KEY_D)
+		mlx->key_tab[KEY_D_INDEX] = false;
+	else if (key == KEY_W)
+		mlx->key_tab[KEY_W_INDEX] = false;
+	else if (key == KEY_S)
+		mlx->key_tab[KEY_S_INDEX] = false;
+}
+
+void	key_hook_down(int key, void *param)
 {
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *) param;
 	if (key == KEY_ESC)
 		mlx_loop_end(mlx->mlx);
-	else if (key == KEY_A)
-		left_rotation(mlx);
+	if (key == KEY_A)
+		mlx->key_tab[KEY_A_INDEX] = true;
 	else if (key == KEY_D)
-		right_rotation(mlx);
+		mlx->key_tab[KEY_D_INDEX] = true;
 	else if (key == KEY_W)
-		move_forward(mlx);
+		mlx->key_tab[KEY_W_INDEX] = true;
 	else if (key == KEY_S)
-		move_backward(mlx);
+		mlx->key_tab[KEY_S_INDEX] = true;
 	else if (key == KEY_F11)
 		mlx_set_window_fullscreen(mlx->mlx, mlx->win, 1);
 	else if (key == KEY_F12)

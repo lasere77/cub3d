@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 16:58:21 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/10 17:49:42 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ int	main(void)
 	mlx.ray = (t_ray){0};
 	init_window(&mlx);
 	mlx_set_fps_goal(mlx.mlx, FPS_GOAL);
-	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, key_hook, &mlx);
+	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, key_hook_down, &mlx);
+	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYUP, key_hook_up, &mlx);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, window_hook, &mlx);
 	gettimeofday(&mlx.start, NULL);
 	mlx_add_loop_hook(mlx.mlx, update, &mlx);
