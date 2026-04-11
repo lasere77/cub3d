@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/10 17:49:42 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 16:40:22 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,14 @@
 #include "raycasting.h"
 #include "event.h"
 #include "error.h"
+#include "init_mlx.h"
+#include "get_map.h"
 
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
-
-int	worldMap[MAP_WIDTH][MAPHEIGHT] =
-{
-{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 4, 0, 0, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 4, 0, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
 
 void	draw(t_mlx *mlx, int x, int h, mlx_color color)
 {
@@ -72,64 +46,39 @@ void	draw(t_mlx *mlx, int x, int h, mlx_color color)
 	mlx_set_image_region(mlx->mlx, mlx->screen.img, x, draw_start, 1, draw_end - draw_start, mlx->screen.color_tab);
 }
 
-mlx_color	get_color(int mapX, int mapY, int side)
+mlx_color	get_color(t_mlx *mlx, int map_x, int map_y, int side)
 {
 	mlx_color	color;
 
 	color = (mlx_color){0};
 	color.a = ALPHA;
-	if (worldMap[mapX][mapY] == 1)
+	if (get_map_id(mlx, map_x, map_y) == MAP_WALL)
 		color.r = 255;
-	else if (worldMap[mapX][mapY] == 2)
-		color.g = 255;
-	else if (worldMap[mapX][mapY] == 3)
-		color.b = 255;
-	else if (worldMap[mapX][mapY] == 4)
-		color.rgba = 255 << 16 | 255 << 8 | 255;
-	else
-		color.rgba = 255 << 16 | 150 << 8 | 20;
 	if (side == 1/* && worldMap[mapX][mapY] != 1*/)
 		color.rgba = color.rgba / 2;
 	return (color);
 }
 
-static inline void	init_window(t_mlx *mlx)
-{
-	mlx_window_create_info	info;
-
-	info = (mlx_window_create_info){0};
-	mlx->mlx = mlx_init();
-	if (!mlx->mlx)
-		panic("Failed to load MacroLibX.", NULL, 1);
-	info.title = "cub3D";
-	info.is_resizable = false;
-	info.is_fullscreen = true;
-	mlx->win = mlx_new_window(mlx->mlx, &info);
-	if (!mlx->win)
-		panic("Error creating windows.", mlx, 1);
-	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
-	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
-	mlx->screen.color_tab = malloc(sizeof(mlx_color) * mlx->screen.h);
-	if (!mlx->screen.color_tab)
-		panic("Memory alloc failed.\n", mlx, 1);
-	mlx->screen.wallpaper = malloc(sizeof(mlx_color) * mlx->screen.w * mlx->screen.h);
-	if (!mlx->screen.wallpaper)
-		panic("Memory alloc failed.\n", mlx, 1);
-	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.w, mlx->screen.h);
-	if (!mlx->screen.img)
-		panic("Error creating image.", mlx, 1);
-	mlx->screen.need_redraw = true;
-}
-
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_mlx	mlx;
 
+	if (argc != 2)
+		panic("Format: ./cub3D your_scene_description.cub", NULL, 1);
 	mlx = (t_mlx){0};
-	mlx.player = (t_player){22, 12, -1, 0, 0, 0.66, 0, 0};
 	mlx.ray = (t_ray){0};
-	init_window(&mlx);
-	mlx_set_fps_goal(mlx.mlx, FPS_GOAL);
+	init_mlx(&mlx, argv[1]);
+	for (size_t h = 0; h < mlx.map.h; h++)
+	{
+		for (size_t w = 0; w < mlx.map.w; w++)
+		{
+			if (get_map_id(&mlx, w, h) == MAP_VOID)
+				printf(" ");
+			else
+				printf("%d", get_map_id(&mlx, w, h));
+		}
+		printf("\n");
+	}
 	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, key_hook_down, &mlx);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYUP, key_hook_up, &mlx);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, window_hook, &mlx);

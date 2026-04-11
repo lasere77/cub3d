@@ -6,13 +6,14 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/11 09:52:58 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 16:58:41 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "mlx_extended.h"
 #include "player_movement.h"
+#include "get_map.h"
 
 #include <math.h>
 #include <stdbool.h>
@@ -39,7 +40,7 @@ void	calculate_data_dda(t_mlx *mlx, int mapX, int mapY)
 		mlx->ray.side_y = (mapY + 1 - mlx->player.pos_y) * mlx->ray.delta_y;
 }
 
-int	dda(t_mlx *mlx, int *mapX, int *mapY)
+int	dda(t_mlx *mlx, int *map_x, int *map_y)
 {
 	int	side;
 
@@ -48,16 +49,16 @@ int	dda(t_mlx *mlx, int *mapX, int *mapY)
 		if (mlx->ray.side_x < mlx->ray.side_y)
 		{
 			mlx->ray.side_x += mlx->ray.delta_x;
-			*mapX += 1 - (2 * (mlx->ray.ray_dir_x < 0));
+			*map_x += 1 - (2 * (mlx->ray.ray_dir_x < 0));
 			side = 0;
 		}
 		else
 		{
 			mlx->ray.side_y += mlx->ray.delta_y;
-			*mapY += 1 - (2 * (mlx->ray.ray_dir_y < 0));
+			*map_y += 1 - (2 * (mlx->ray.ray_dir_y < 0));
 			side = 1;
 		}
-		if (worldMap[*mapX][*mapY] > 0)
+		if (get_map_id(mlx, *map_x, *map_y) != MAP_ROOM)
 			break ;
 	}
 	if (side == 0)
@@ -105,7 +106,7 @@ void	update(void *param)
 			map_y = mlx->player.pos_y;
 			calculate_data_dda(mlx, map_x, map_y);
 			side = dda(mlx, &map_x, &map_y);
-			draw(mlx, x, mlx->screen.h, get_color(map_x, map_y, side));
+			draw(mlx, x, mlx->screen.h, get_color(mlx, map_x, map_y, side));
 			x++;
 		}
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);	

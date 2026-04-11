@@ -6,11 +6,12 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:09:33 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/11 09:52:27 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 16:36:15 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player_movement.h"
+#include "get_map.h"
 
 #include <math.h>
 
@@ -51,9 +52,9 @@ static void	move_forward(t_mlx *mlx)
 	t_player	*p;
 
 	p = &mlx->player;
-	if (worldMap[(int)(p->pos_x + p->dir_x * p->move_speed)][(int)p->pos_y] == 0)
+	if (get_map_id(mlx, (int)(p->pos_x + p->dir_x * p->move_speed), (int)p->pos_y) == MAP_ROOM)
 		p->pos_x += p->dir_x * p->move_speed;
-    if (worldMap[(int)p->pos_x][(int)(p->pos_y + p->dir_y * p->move_speed)] == 0)
+	if (get_map_id(mlx, (int)p->pos_x, (int)(p->pos_y + p->dir_y * p->move_speed)) == MAP_ROOM)
 		p->pos_y += p->dir_y * p->move_speed;
 	mlx->screen.need_redraw = true;
 }
@@ -63,9 +64,9 @@ static void	move_backward(t_mlx *mlx)
 	t_player	*p;
 
 	p = &mlx->player;
-	if (worldMap[(int)(p->pos_x - p->dir_x * p->move_speed)][(int)p->pos_y] == 0)
+	if (get_map_id(mlx, (int)(p->pos_x - p->dir_x * p->move_speed), (int)p->pos_y) == MAP_ROOM)
 		p->pos_x -= p->dir_x * p->move_speed;
-    if (worldMap[(int)p->pos_x][(int)(p->pos_y - p->dir_y * p->move_speed)] == 0)
+	if (get_map_id(mlx, (int)p->pos_x, (int)(p->pos_y - p->dir_y * p->move_speed)) == MAP_ROOM)
 		p->pos_y -= p->dir_y * p->move_speed;
 	mlx->screen.need_redraw = true;
 }
