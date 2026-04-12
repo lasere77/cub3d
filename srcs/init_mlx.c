@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/12 12:14:16 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/12 15:00:08 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	init_window(t_mlx *mlx)
 		panic("Error creating windows.", mlx, 1);
 	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
 	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
-	mlx->screen.buffer = malloc(sizeof(mlx_color) * mlx->screen.w * mlx->screen.h);
+	mlx->screen.buffer = malloc(sizeof(mlx_color)
+			* mlx->screen.w * mlx->screen.h);
 	if (!mlx->screen.buffer)
 		panic("Memory alloc failed.\n", mlx, 1);
 	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.h, mlx->screen.w);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 12:52:17 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/12 15:10:43 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ static void	set_speed_from_frame_time(t_mlx *mlx)
 	mlx->frame_time /= 1000;
 	gettimeofday(&mlx->start, NULL);
 	mlx->player.move_speed = mlx->frame_time * 4.0;
-    mlx->player.rot_speed = mlx->frame_time * 2.0;
+	mlx->player.rot_speed = mlx->frame_time * 2.0;
 }
 
 static bool	need_redraw(t_mlx *mlx)
 {
 	struct timeval	current;
 	double			current_time;
-	
+
 	if (mlx->screen.need_redraw == false)
 		return (false);
 	gettimeofday(&current, NULL);
@@ -123,11 +123,10 @@ void	update(void *param)
 			calculate_data_dda(mlx, map_x, map_y);
 			side = dda(mlx, &map_x, &map_y);
 			draw(mlx, mlx->screen.h, get_color(mlx, map_x, map_y, side));
-			x++;
+			++x;
 		}
 		mlx_set_image_region(mlx->mlx, mlx->screen.img, 0, 0, mlx->screen.h, mlx->screen.w, mlx->screen.buffer);
-		mlx_put_transformed_image_to_window(mlx->mlx, mlx->win, 
-			mlx->screen.img, (mlx->screen.w - mlx->screen.h) >> 1, -((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
+		mlx_put_transformed_image_to_window(mlx->mlx, mlx->win,  mlx->screen.img, (mlx->screen.w - mlx->screen.h) >> 1, -((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
 	}
 	set_speed_from_frame_time(mlx);
 	movement(mlx);

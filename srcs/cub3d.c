@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 12:49:39 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/12 14:59:47 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
-#include "mlx_extended.h"
 
 #include "cub.h"
 #include "raycasting.h"
@@ -20,7 +19,6 @@
 #include "init_mlx.h"
 #include "get_map.h"
 
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -58,7 +56,7 @@ mlx_color	get_color(t_mlx *mlx, int map_x, int map_y, int side)
 	color.a = ALPHA;
 	if (get_map_id(mlx, map_x, map_y) == MAP_WALL)
 		color.r = 255;
-	if (side == 1/* && worldMap[mapX][mapY] != 1*/)
+	if (side == 1)
 		color.rgba = color.rgba / 2;
 	return (color);
 }
@@ -72,17 +70,6 @@ int	main(int argc, char **argv)
 	mlx = (t_mlx){0};
 	mlx.ray = (t_ray){0};
 	init_mlx(&mlx, argv[1]);
-	for (size_t h = 0; h < mlx.map.h; h++)
-	{
-		for (size_t w = 0; w < mlx.map.w; w++)
-		{
-			if (get_map_id(&mlx, w, h) == MAP_VOID)
-				printf(" ");
-			else
-				printf("%d", get_map_id(&mlx, w, h));
-		}
-		printf("\n");
-	}
 	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, key_hook_down, &mlx);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYUP, key_hook_up, &mlx);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, window_hook, &mlx);
@@ -91,4 +78,3 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx.mlx);
 	panic(NULL, &mlx, 0);
 }
-	// mlx_set_image_region(mlx->mlx, mlx->screen.img, x, draw_start, 1, draw_end - draw_start, mlx->screen.color_tab);
