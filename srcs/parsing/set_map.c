@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 20:09:34 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/11 16:30:55 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/11 19:38:09 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static void	set_player(t_mlx *mlx, int x, int y, char dir)
 	if (dir == 'N' || dir == 'S')
 		mlx->player.dir_x = 0;
 	else if (dir == 'W')
-		mlx->player.dir_x = 1;
-	else if (dir == 'E')
 		mlx->player.dir_x = -1;
+	else if (dir == 'E')
+		mlx->player.dir_x = 1;
 	if (dir == 'W' || dir == 'E')
 		mlx->player.dir_y = 0;
 	else if (dir == 'N')
-		mlx->player.dir_y = -1;
-	else if (dir == 'S')
 		mlx->player.dir_y = 1;
+	else if (dir == 'S')
+		mlx->player.dir_y = -1;
 	mlx->player.plane_x = 0.66;
 	mlx->player.plane_y = 0;
 }

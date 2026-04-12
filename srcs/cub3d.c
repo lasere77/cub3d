@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/11 16:40:22 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/12 12:11:39 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-void	draw(t_mlx *mlx, int x, int h, mlx_color color)
+void	draw(t_mlx *mlx, int h, mlx_color color)
 {
 	int			line_height;
 	int			draw_start;
@@ -41,9 +41,13 @@ void	draw(t_mlx *mlx, int x, int h, mlx_color color)
 	if (draw_end >= h)
 		draw_end = h - 1;
 	i = 0;
-	while (i < draw_end - draw_start)
-		mlx->screen.color_tab[i++] = color;
-	mlx_set_image_region(mlx->mlx, mlx->screen.img, x, draw_start, 1, draw_end - draw_start, mlx->screen.color_tab);
+	mlx->screen.i -= mlx->screen.h;
+	while (i < draw_start)
+		mlx->screen.buffer[mlx->screen.i + i++] = mlx->map.ceil;
+	while (i < draw_end)
+		mlx->screen.buffer[mlx->screen.i + i++] = color;
+	while (i < mlx->screen.h)
+		mlx->screen.buffer[mlx->screen.i + i++] = mlx->map.floor;
 }
 
 mlx_color	get_color(t_mlx *mlx, int map_x, int map_y, int side)
@@ -87,3 +91,4 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx.mlx);
 	panic(NULL, &mlx, 0);
 }
+	// mlx_set_image_region(mlx->mlx, mlx->screen.img, x, draw_start, 1, draw_end - draw_start, mlx->screen.color_tab);

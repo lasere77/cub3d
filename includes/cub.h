@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/11 16:40:47 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/12 12:21:08 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stddef.h>
 # include <sys/time.h>
 
-# define FPS_GOAL 60
+# define FPS_GOAL 1000
 # define ALPHA -1 // 0xFF
 
 typedef enum e_key_index
@@ -50,8 +50,8 @@ typedef struct s_player
 typedef struct s_screen
 {
 	mlx_image	img;
-	mlx_color	*color_tab;
-	mlx_color	*wallpaper;
+	mlx_color	*buffer;
+	int			i;
 	int			w;
 	int			h;
 	bool		need_redraw;
@@ -101,7 +101,6 @@ typedef struct s_mlx
 }					t_mlx;
 
 mlx_color	get_color(t_mlx *mlx, int mapX, int mapY, int side);
-void		draw(t_mlx *mlx, int x, int h, mlx_color color);
-void		check_resolution(t_mlx *mlx);
+void		draw(t_mlx *mlx, int h, mlx_color color);
 
 #endif

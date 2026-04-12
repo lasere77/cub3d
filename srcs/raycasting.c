@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/11 16:58:41 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/12 12:16:00 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static void	set_speed_from_frame_time(t_mlx *mlx)
 	mlx->frame_time -= mlx->start.tv_sec * 1000 + mlx->start.tv_usec / 1000.0;
 	mlx->frame_time /= 1000;
 	gettimeofday(&mlx->start, NULL);
-	mlx->player.move_speed = mlx->frame_time * 5.0;
-    mlx->player.rot_speed = mlx->frame_time * 3.0;
+	mlx->player.move_speed = mlx->frame_time * 4.0;
+    mlx->player.rot_speed = mlx->frame_time * 2.0;
 }
 
 void	update(void *param)
@@ -92,7 +92,7 @@ void	update(void *param)
 	mlx = (t_mlx *)param;
 	if (mlx->screen.need_redraw)
 	{
-		mlx_set_image_region(mlx->mlx, mlx->screen.img, 0, 0, mlx->screen.w, mlx->screen.h, mlx->screen.wallpaper);
+		mlx->screen.i = mlx->screen.h * mlx->screen.w;
 		mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x334D4DFF});
 		x = 0;
 		while (x < mlx->screen.w)
@@ -106,10 +106,12 @@ void	update(void *param)
 			map_y = mlx->player.pos_y;
 			calculate_data_dda(mlx, map_x, map_y);
 			side = dda(mlx, &map_x, &map_y);
-			draw(mlx, x, mlx->screen.h, get_color(mlx, map_x, map_y, side));
+			draw(mlx, mlx->screen.h, get_color(mlx, map_x, map_y, side));
 			x++;
 		}
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->screen.img, 0, 0);	
+		mlx_set_image_region(mlx->mlx, mlx->screen.img, 0, 0, mlx->screen.h, mlx->screen.w, mlx->screen.buffer);
+		mlx_put_transformed_image_to_window(mlx->mlx, mlx->win, 
+			mlx->screen.img, (mlx->screen.w - mlx->screen.h) >> 1, -((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
 		mlx->screen.need_redraw = false;
 	}
 	set_speed_from_frame_time(mlx);

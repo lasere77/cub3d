@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/11 16:15:32 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/12 12:14:16 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,10 @@ static void	init_window(t_mlx *mlx)
 		panic("Error creating windows.", mlx, 1);
 	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
 	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
-	mlx->screen.color_tab = malloc(sizeof(mlx_color) * mlx->screen.h);
-	if (!mlx->screen.color_tab)
+	mlx->screen.buffer = malloc(sizeof(mlx_color) * mlx->screen.w * mlx->screen.h);
+	if (!mlx->screen.buffer)
 		panic("Memory alloc failed.\n", mlx, 1);
-	mlx->screen.wallpaper = malloc(sizeof(mlx_color) * mlx->screen.w * mlx->screen.h);
-	if (!mlx->screen.wallpaper)
-		panic("Memory alloc failed.\n", mlx, 1);
-	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.w, mlx->screen.h);
+	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.h, mlx->screen.w);
 	if (!mlx->screen.img)
 		panic("Error creating image.", mlx, 1);
 	mlx->screen.need_redraw = true;
