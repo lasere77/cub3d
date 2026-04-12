@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 20:09:34 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/11 19:38:09 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/12 17:31:42 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,29 @@
 
 static void	set_player(t_mlx *mlx, int x, int y, char dir)
 {
-	mlx->player.pos_x = x;
-	mlx->player.pos_y = y;
-	if (dir == 'N' || dir == 'S')
-		mlx->player.dir_x = 0;
-	else if (dir == 'W')
+	ft_memset(&mlx->player, 0, sizeof(t_player));
+	mlx->player.pos_x = x + 0.5;
+	mlx->player.pos_y = y + 0.5;
+	if (dir == 'W')
+	{
 		mlx->player.dir_x = -1;
+		mlx->player.plane_y = -0.66;
+	}
 	else if (dir == 'E')
+	{
 		mlx->player.dir_x = 1;
-	if (dir == 'W' || dir == 'E')
-		mlx->player.dir_y = 0;
+		mlx->player.plane_y = 0.66;
+	}
 	else if (dir == 'N')
-		mlx->player.dir_y = 1;
-	else if (dir == 'S')
+	{
 		mlx->player.dir_y = -1;
-	mlx->player.plane_x = 0.66;
-	mlx->player.plane_y = 0;
+		mlx->player.plane_x = 0.66;
+	}
+	else if (dir == 'S')
+	{
+		mlx->player.dir_y = 1;
+		mlx->player.plane_x = -0.66;
+	}
 }
 
 bool	get_player(t_mlx *mlx, char **scene)

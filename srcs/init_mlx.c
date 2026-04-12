@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/12 15:00:08 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/12 17:04:58 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ static void	init_window(t_mlx *mlx)
 	info = (mlx_window_create_info){0};
 	info.title = "cub3D";
 	info.is_resizable = false;
-	info.is_fullscreen = true;
+	info.is_fullscreen = false;
 	mlx->win = mlx_new_window(mlx->mlx, &info);
 	if (!mlx->win)
 		panic("Error creating windows.", mlx, 1);
 	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
 	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
+	mlx_set_window_position(mlx->mlx, mlx->win, 0, 0);
 	mlx->screen.buffer = malloc(sizeof(mlx_color)
 			* mlx->screen.w * mlx->screen.h);
 	if (!mlx->screen.buffer)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 14:59:47 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/12 17:45:50 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ mlx_color	get_color(t_mlx *mlx, int map_x, int map_y, int side)
 	color = (mlx_color){0};
 	color.a = ALPHA;
 	if (get_map_id(mlx, map_x, map_y) == MAP_WALL)
-		color.r = 255;
+		color.rgba = 0xffc4ddff;
 	if (side == 1)
 		color.rgba = color.rgba / 2;
 	return (color);

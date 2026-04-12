@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_ceil_floor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 08:38:23 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/11 16:20:28 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/12 16:56:33 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static int	get_rgba(t_mlx *mlx, char *scene, char type)
 	if (check_color(scene, rgb))
 		return (1);
 	color.a = ALPHA;
-	color.b = rgb[RGB_R];
+	color.r = rgb[RGB_R];
 	color.g = rgb[RGB_G];
-	color.g = rgb[RGB_B];
+	color.b = rgb[RGB_B];
 	if (type == 'F')
 		mlx->map.floor = color;
 	else
