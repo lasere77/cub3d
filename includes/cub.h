@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 12:21:08 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/12 12:52:16 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include <stddef.h>
 # include <sys/time.h>
 
-# define FPS_GOAL 1000
+# define FPS_GOAL 600
+# define REAL_FPS_GOAL 65
 # define ALPHA -1 // 0xFF
 
 typedef enum e_key_index
@@ -49,12 +50,13 @@ typedef struct s_player
 
 typedef struct s_screen
 {
-	mlx_image	img;
-	mlx_color	*buffer;
-	int			i;
-	int			w;
-	int			h;
-	bool		need_redraw;
+	mlx_image		img;
+	mlx_color		*buffer;
+	double			last_update;
+	int				i;
+	int				w;
+	int				h;
+	bool			need_redraw;
 }				t_screen;
 
 typedef struct s_ray

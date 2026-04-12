@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 12:11:39 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/12 12:49:39 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw(t_mlx *mlx, int h, mlx_color color)
 	if (draw_start < 0)
 		draw_start = 0;
 	if (draw_end >= h)
-		draw_end = h - 1;
+		draw_end = h;
 	i = 0;
 	mlx->screen.i -= mlx->screen.h;
 	while (i < draw_start)
