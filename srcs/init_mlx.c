@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/12 17:04:58 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/13 11:41:07 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "get_scene.h"
 #include "get_ceil_floor.h"
 #include "get_map.h"
+#include "get_texture.h"
 
 static void	init_window(t_mlx *mlx)
 {
@@ -35,7 +36,7 @@ static void	init_window(t_mlx *mlx)
 	mlx->screen.buffer = malloc(sizeof(mlx_color)
 			* mlx->screen.w * mlx->screen.h);
 	if (!mlx->screen.buffer)
-		panic("Memory alloc failed.\n", mlx, 1);
+		panic("Memory alloc failed.", mlx, 1);
 	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.h, mlx->screen.w);
 	if (!mlx->screen.img)
 		panic("Error creating image.", mlx, 1);

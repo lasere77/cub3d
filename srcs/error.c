@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:40:20 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 12:14:40 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/13 22:17:04 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	destroy_txt(t_mlx *mlx)
 
 void	panic(char *msg, t_mlx *mlx, int exit_code)
 {
+	int	i;
+
+	i = 0;
 	if (msg || exit_code == -1)
 		printf("Error\n%s\n", msg);
 	if (exit_code == -1)
@@ -49,6 +52,8 @@ void	panic(char *msg, t_mlx *mlx, int exit_code)
 			mlx_destroy_context(mlx->mlx);
 		free(mlx->screen.buffer);
 		free(mlx->map.map);
+		while (i < 4)
+			free(mlx->map.txt[i++].buffer);
 	}
 	exit(exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 17:45:50 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/13 22:27:58 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,48 +18,13 @@
 #include "error.h"
 #include "init_mlx.h"
 #include "get_map.h"
+#include "get_texture.h"
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
-
-void	draw(t_mlx *mlx, int h, mlx_color color)
-{
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
-	int			i;
-
-	line_height = h / mlx->ray.ray_dist;
-	draw_start = (-line_height >> 1) + (h >> 1);
-	draw_end = (line_height >> 1) + (h >> 1);
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= h)
-		draw_end = h;
-	i = 0;
-	mlx->screen.i -= mlx->screen.h;
-	while (i < draw_start)
-		mlx->screen.buffer[mlx->screen.i + i++] = mlx->map.ceil;
-	while (i < draw_end)
-		mlx->screen.buffer[mlx->screen.i + i++] = color;
-	while (i < mlx->screen.h)
-		mlx->screen.buffer[mlx->screen.i + i++] = mlx->map.floor;
-}
-
-mlx_color	get_color(t_mlx *mlx, int map_x, int map_y, int side)
-{
-	mlx_color	color;
-
-	color = (mlx_color){0};
-	color.a = ALPHA;
-	if (get_map_id(mlx, map_x, map_y) == MAP_WALL)
-		color.rgba = 0xffc4ddff;
-	if (side == 1)
-		color.rgba = color.rgba / 2;
-	return (color);
-}
+#include <math.h>
 
 int	main(int argc, char **argv)
 {

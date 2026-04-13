@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:34:26 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/08 10:38:11 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 22:25:02 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "cub.h"
 
-void	calculate_data_dda(t_mlx *mlx, int mapX, int mapY);
-int		dda(t_mlx *mlx, int *mapX, int *mapY);
 void	update(void *param);
 
 #endif

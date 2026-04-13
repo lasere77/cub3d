@@ -1,7 +1,7 @@
-NO ./assets/textures/wolftextures.png
-SO ./assets/textures/wolftextures.png
-WE ./assets/textures/wolftextures.png
-EA ./assets/textures/wolftextures.png
+NO ./assets/textures/no.png
+SO ./assets/textures/so.png
+WE ./assets/textures/we.png
+EA ./assets/textures/ea.png
 
 F 203,189,147
 C 129,137,121

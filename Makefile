@@ -7,10 +7,13 @@ SOURCES =	cub3d.c						\
 			raycasting.c				\
 			error.c						\
 			init_mlx.c					\
+			dda.c						\
+			draw.c						\
 			parsing/get_map.c			\
 			parsing/set_map.c			\
 			parsing/get_scene.c			\
 			parsing/get_ceil_floor.c	\
+			parsing/get_texture.c
 
 SOURCES	:=	$(addprefix $(SRCS_DIR), $(SOURCES))
 
