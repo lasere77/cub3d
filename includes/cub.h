@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 14:21:30 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 14:24:35 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 typedef enum e_key_index
 {
 	KEY_ESC_INDEX,
+	KEY_F10_INDEX,
 	KEY_F11_INDEX,
 	KEY_F12_INDEX,
 	KEY_A_INDEX,

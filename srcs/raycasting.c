@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 14:21:09 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 14:32:04 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,8 @@ void	update(void *param)
 		mlx_set_image_region(mlx->mlx, mlx->screen.img, 0, 0, mlx->screen.h, mlx->screen.w, mlx->screen.buffer);
 	}
 	mlx_put_transformed_image_to_window(mlx->mlx, mlx->win,  mlx->screen.img, (mlx->screen.w - mlx->screen.h) >> 1, -((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
-	overlay(mlx);
+	if (mlx->key_tab[KEY_F10_INDEX])
+		overlay(mlx);
 	set_speed_from_frame_time(mlx);
 	movement(mlx);
 }

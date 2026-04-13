@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/13 13:20:17 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 14:33:10 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	init_window(t_mlx *mlx)
 	if (!mlx->screen.img)
 		panic("Error creating image.", mlx, 1);
 	mlx->screen.need_redraw = true;
+	mlx->key_tab[KEY_F10_INDEX] = true;
 }
 
 void	init_mlx(t_mlx *mlx, char *argv)
