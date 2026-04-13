@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 17:44:00 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:21:30 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define FPS_GOAL 120
 # define REAL_FPS_GOAL 65
 # define ALPHA -1 // 0xFF
+
+# define FONT_SIZE 10
+# define DEAFAULT_COLOR .rgba = 0xFF
 
 typedef enum e_key_index
 {
@@ -53,6 +56,7 @@ typedef struct s_screen
 	mlx_image		img;
 	mlx_color		*buffer;
 	double			last_update;
+	int				wait_second;
 	int				i;
 	int				w;
 	int				h;
@@ -99,6 +103,7 @@ typedef struct s_mlx
 	t_map			map;
 	struct timeval	start;
 	bool			key_tab[NB_SET_KEY];
+	int				mlx_fps;
 	double			frame_time;
 }					t_mlx;
 

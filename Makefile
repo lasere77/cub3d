@@ -11,6 +11,7 @@ SOURCES =	cub3d.c						\
 			parsing/set_map.c			\
 			parsing/get_scene.c			\
 			parsing/get_ceil_floor.c	\
+			overlay/overlay.c			\
 
 SOURCES	:=	$(addprefix $(SRCS_DIR), $(SOURCES))
 

@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 15:10:43 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 14:21:09 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx_extended.h"
 #include "player_movement.h"
 #include "get_map.h"
+#include "overlay.h"
 
 #include <math.h>
 #include <stdbool.h>
@@ -106,10 +107,10 @@ void	update(void *param)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)param;
+	mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){DEAFAULT_COLOR});
 	if (need_redraw(mlx))
 	{
 		mlx->screen.i = mlx->screen.h * mlx->screen.w;
-		mlx_clear_window(mlx->mlx, mlx->win, (mlx_color){.rgba = 0x334D4DFF});
 		x = 0;
 		while (x < mlx->screen.w)
 		{
@@ -126,8 +127,9 @@ void	update(void *param)
 			++x;
 		}
 		mlx_set_image_region(mlx->mlx, mlx->screen.img, 0, 0, mlx->screen.h, mlx->screen.w, mlx->screen.buffer);
-		mlx_put_transformed_image_to_window(mlx->mlx, mlx->win,  mlx->screen.img, (mlx->screen.w - mlx->screen.h) >> 1, -((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
 	}
+	mlx_put_transformed_image_to_window(mlx->mlx, mlx->win,  mlx->screen.img, (mlx->screen.w - mlx->screen.h) >> 1, -((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
+	overlay(mlx);
 	set_speed_from_frame_time(mlx);
 	movement(mlx);
 }

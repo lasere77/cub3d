@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/12 17:04:58 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/13 13:20:17 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	init_window(t_mlx *mlx)
 	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
 	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
 	mlx_set_window_position(mlx->mlx, mlx->win, 0, 0);
+	mlx_set_font_scale(mlx->mlx, "default", FONT_SIZE);
 	mlx->screen.buffer = malloc(sizeof(mlx_color)
 			* mlx->screen.w * mlx->screen.h);
 	if (!mlx->screen.buffer)

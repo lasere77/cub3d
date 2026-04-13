@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   overlay.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/13 13:16:38 by mcolin            #+#    #+#             */
+/*   Updated: 2026/04/13 14:19:38 by mcolin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "overlay.h"
+#include "libft.h"
+
+static void	display_fps(t_mlx *mlx)
+{
+	struct timeval	current;
+	int				current_time;
+	char			buffer[MSG_MLX_FPS_LEN + 13];
+
+	gettimeofday(&current, NULL);
+	current_time = current.tv_sec + current.tv_usec / 100000;
+	if (current_time - mlx->screen.wait_second)
+	{
+		mlx->screen.wait_second = current_time;
+		mlx->mlx_fps = 1 / mlx->frame_time;
+	}
+	ft_strcpy(buffer, MSG_MLX_FPS);
+	ft_itoa_buffer(mlx->mlx_fps, buffer + MSG_MLX_FPS_LEN, 13);
+	mlx_string_put(mlx->mlx, mlx->win, 20, 20,
+		(mlx_color) {DEAFAULT_COLOR}, buffer);
+}
+
+void	display_player_pos(t_mlx *mlx)
+{
+	char	str_player_pos_x[MSG_PLAYER_POS_X_LEN + 13];
+	char	str_player_pos_y[MSG_PLAYER_POS_Y_LEN + 13];
+
+	ft_strcpy(str_player_pos_x, MSG_PLAYER_POS_X);
+	ft_strcpy(str_player_pos_y, MSG_PLAYER_POS_Y);
+	ft_itoa_buffer(mlx->player.pos_x, str_player_pos_x + MSG_PLAYER_POS_X_LEN, 13);
+	ft_itoa_buffer(mlx->player.pos_y, str_player_pos_y + MSG_PLAYER_POS_Y_LEN, 13);
+	mlx_string_put(mlx->mlx, mlx->win, 20, 40, (mlx_color) {DEAFAULT_COLOR}, str_player_pos_x);
+	mlx_string_put(mlx->mlx, mlx->win, 20, 60, (mlx_color) {DEAFAULT_COLOR}, str_player_pos_y);
+}
+
+void	overlay(t_mlx *mlx)
+{
+	display_fps(mlx);
+	display_player_pos(mlx);
+}
