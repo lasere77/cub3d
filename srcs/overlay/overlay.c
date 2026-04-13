@@ -6,12 +6,13 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:16:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 14:19:38 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 16:47:54 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "overlay.h"
 #include "libft.h"
+#include "mlx_extended.h"
 
 static void	display_fps(t_mlx *mlx)
 {
@@ -32,7 +33,7 @@ static void	display_fps(t_mlx *mlx)
 		(mlx_color) {DEAFAULT_COLOR}, buffer);
 }
 
-void	display_player_pos(t_mlx *mlx)
+static void	display_player_pos(t_mlx *mlx)
 {
 	char	str_player_pos_x[MSG_PLAYER_POS_X_LEN + 13];
 	char	str_player_pos_y[MSG_PLAYER_POS_Y_LEN + 13];
@@ -49,4 +50,5 @@ void	overlay(t_mlx *mlx)
 {
 	display_fps(mlx);
 	display_player_pos(mlx);
+	mlx_put_transformed_image_to_window(mlx->mlx, mlx->win,  mlx->screen.img_mini_map, mlx->screen.w - (mlx->map.w * MINI_MAP_SIZE), 0, MINI_MAP_SIZE, MINI_MAP_SIZE, 0);
 }

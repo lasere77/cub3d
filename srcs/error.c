@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:40:20 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 12:14:40 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:42:47 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,13 @@ void	panic(char *msg, t_mlx *mlx, int exit_code)
 		destroy_txt(mlx);
 		if (mlx->win)
 			mlx_destroy_window(mlx->mlx, mlx->win);
+		if (mlx->screen.buffer_mini_map)
+			mlx_destroy_image(mlx->mlx, mlx->screen.img_mini_map);
 		if (mlx->screen.img)
 			mlx_destroy_image(mlx->mlx, mlx->screen.img);
 		if (mlx->mlx)
 			mlx_destroy_context(mlx->mlx);
+		free(mlx->screen.buffer_mini_map);
 		free(mlx->screen.buffer);
 		free(mlx->map.map);
 	}

@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:21:09 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 14:09:29 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 16:47:23 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define MSG_PLAYER_POS_Y "player y:"
 # define MSG_PLAYER_POS_Y_LEN (sizeof(MSG_PLAYER_POS_Y) - 1)
+
+# define MINI_MAP_SIZE 7
 
 void	overlay(t_mlx *mlx);
 

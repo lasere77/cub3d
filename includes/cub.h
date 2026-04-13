@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 14:24:35 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 16:41:21 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_player
 typedef struct s_screen
 {
 	mlx_image		img;
+	mlx_image		img_mini_map;
+	mlx_color		*buffer_mini_map;
 	mlx_color		*buffer;
 	double			last_update;
 	int				wait_second;

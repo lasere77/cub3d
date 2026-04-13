@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/13 14:33:10 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 16:41:48 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@
 #include "get_scene.h"
 #include "get_ceil_floor.h"
 #include "get_map.h"
+
+#include <stdlib.h>
+
+static void	init_component(t_mlx *mlx)
+{
+	mlx->screen.buffer = malloc(sizeof(mlx_color)
+			* mlx->screen.w * mlx->screen.h);
+	mlx->screen.buffer_mini_map = malloc(sizeof(mlx_color) * mlx->screen.w * mlx->screen.h);
+	if (!mlx->screen.buffer || !mlx->screen.buffer_mini_map)
+		panic("Memory alloc failed.\n", mlx, 1);
+	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.h, mlx->screen.w);
+	mlx->screen.img_mini_map = mlx_new_image(mlx->mlx, mlx->screen.w, mlx->screen.h);
+	if (!mlx->screen.img || !mlx->screen.img_mini_map)
+		panic("Error creating image.", mlx, 1);
+}
 
 static void	init_window(t_mlx *mlx)
 {
@@ -33,13 +48,7 @@ static void	init_window(t_mlx *mlx)
 	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
 	mlx_set_window_position(mlx->mlx, mlx->win, 0, 0);
 	mlx_set_font_scale(mlx->mlx, "default", FONT_SIZE);
-	mlx->screen.buffer = malloc(sizeof(mlx_color)
-			* mlx->screen.w * mlx->screen.h);
-	if (!mlx->screen.buffer)
-		panic("Memory alloc failed.\n", mlx, 1);
-	mlx->screen.img = mlx_new_image(mlx->mlx, mlx->screen.h, mlx->screen.w);
-	if (!mlx->screen.img)
-		panic("Error creating image.", mlx, 1);
+	init_component(mlx);
 	mlx->screen.need_redraw = true;
 	mlx->key_tab[KEY_F10_INDEX] = true;
 }
