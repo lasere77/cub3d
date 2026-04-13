@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   overlay.h                                          :+:      :+:    :+:   */
+/*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 13:21:09 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 15:47:37 by mcolin           ###   ########.fr       */
+/*   Created: 2026/04/13 22:29:51 by ykolacze          #+#    #+#             */
+/*   Updated: 2026/04/13 22:34:29 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OVERLAY_H
-# define OVERLAY_H
+#ifndef DRAW_H
+# define DRAW_H
 
 # include "cub.h"
 
-# define MSG_MLX_FPS "mlx fps:"
-
-# define MSG_PLAYER_POS_X "player x:"
-
-# define MSG_PLAYER_POS_Y "player y:"
-
-# define MINI_MAP_SIZE 7
-
-void	overlay(t_mlx *mlx);
+void	draw(t_mlx *mlx, int h, int side);
 
 #endif

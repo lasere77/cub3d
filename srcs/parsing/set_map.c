@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 20:09:34 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/12 17:31:42 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/12 19:29:56 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 static void	set_player(t_mlx *mlx, int x, int y, char dir)
 {
-	ft_memset(&mlx->player, 0, sizeof(t_player));
 	mlx->player.pos_x = x + 0.5;
 	mlx->player.pos_y = y + 0.5;
 	if (dir == 'W')

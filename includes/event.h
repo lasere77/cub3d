@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:56:31 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 14:24:37 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/14 14:48:35 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # define KEY_ESC 41
 # define KEY_F10 67
-# define KEY_F11 68
-# define KEY_F12 69
 # define KEY_A 4
 # define KEY_W 26
 # define KEY_S 22

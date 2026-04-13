@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   overlay.h                                          :+:      :+:    :+:   */
+/*   get_texture.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 13:21:09 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 15:47:37 by mcolin           ###   ########.fr       */
+/*   Created: 2026/04/12 18:37:22 by ykolacze          #+#    #+#             */
+/*   Updated: 2026/04/13 22:33:11 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OVERLAY_H
-# define OVERLAY_H
+#ifndef GET_TEXTURE_H
+# define GET_TEXTURE_H
 
 # include "cub.h"
 
-# define MSG_MLX_FPS "mlx fps:"
+typedef enum e_side
+{
+	SIDE_NO,
+	SIDE_SO,
+	SIDE_WE,
+	SIDE_EA
+}		t_side;
 
-# define MSG_PLAYER_POS_X "player x:"
-
-# define MSG_PLAYER_POS_Y "player y:"
-
-# define MINI_MAP_SIZE 7
-
-void	overlay(t_mlx *mlx);
+void	get_texture(t_mlx *mlx, char **scene);
 
 #endif

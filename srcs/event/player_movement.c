@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:09:33 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 14:56:11 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/13 22:12:34 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	left_rotation(t_mlx *mlx)
 	double		rot_speed;
 
 	p = &mlx->player;
-	rot_speed = p->rot_speed;
+	rot_speed = -p->rot_speed;
 	old_dir_x = p->dir_x;
 	old_plane_x = p->plane_x;
 	p->dir_x = p->dir_x * cos(rot_speed) - p->dir_y * sin(rot_speed);
@@ -44,10 +44,10 @@ static void	right_rotation(t_mlx *mlx)
 	rot_speed = p->rot_speed;
 	old_dir_x = p->dir_x;
 	old_plane_x = p->plane_x;
-	p->dir_x = p->dir_x * cos(-rot_speed) - p->dir_y * sin(-rot_speed);
-	p->dir_y = old_dir_x * sin(-rot_speed) + p->dir_y * cos(-rot_speed);
-	p->plane_x = p->plane_x * cos(-rot_speed) - p->plane_y * sin(-rot_speed);
-	p->plane_y = old_plane_x * sin(-rot_speed) + p->plane_y * cos(-rot_speed);
+	p->dir_x = p->dir_x * cos(rot_speed) - p->dir_y * sin(rot_speed);
+	p->dir_y = old_dir_x * sin(rot_speed) + p->dir_y * cos(rot_speed);
+	p->plane_x = p->plane_x * cos(rot_speed) - p->plane_y * sin(rot_speed);
+	p->plane_y = old_plane_x * sin(rot_speed) + p->plane_y * cos(rot_speed);
 	mlx->screen.need_redraw = true;
 }
 
