@@ -3,28 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:42:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 22:27:58 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:09:14 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 
 #include "cub.h"
 #include "raycasting.h"
 #include "event.h"
 #include "error.h"
 #include "init_mlx.h"
-#include "get_map.h"
-#include "get_texture.h"
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <math.h>
 
 int	main(int argc, char **argv)
 {

@@ -6,11 +6,10 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/14 15:36:08 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/14 19:10:26 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
 #include "error.h"
 #include "mlx.h"
 #include "libft.h"
@@ -19,6 +18,7 @@
 #include "get_map.h"
 #include "get_texture.h"
 
+#include <stdbool.h>
 #include <stdlib.h>
 
 static void	init_component(t_mlx *mlx)
@@ -35,6 +35,7 @@ static void	init_component(t_mlx *mlx)
 			mlx->screen.w, mlx->screen.h);
 	if (!mlx->screen.img || !mlx->screen.img_mini_map)
 		panic("Error creating image.", mlx, 1);
+	mlx_mouse_hide(mlx->mlx);
 }
 
 static void	init_window(t_mlx *mlx)

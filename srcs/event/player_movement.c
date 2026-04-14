@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:09:33 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/13 22:12:34 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/14 19:14:24 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "player_movement.h"
 #include "get_map.h"
 
 #include <math.h>
+#include <stdbool.h>
+#include <unistd.h>
 
 static void	left_rotation(t_mlx *mlx)
 {
@@ -79,8 +80,29 @@ static void	move_backward(t_mlx *mlx)
 	mlx->screen.need_redraw = true;
 }
 
+static void	get_mouse_track(t_mlx *mlx)
+{
+	int				x;
+	int				y;
+	double			old_rot_speed;
+
+	mlx_mouse_get_pos(mlx->mlx, &x, &y);
+	if (x != mlx->screen.w >> 1)
+	{
+		old_rot_speed = mlx->player.rot_speed;
+		mlx->player.rot_speed = old_rot_speed * 2;
+		if (x <  mlx->screen.w >> 1)
+			left_rotation(mlx);
+		else if (x >  mlx->screen.w >> 1)
+			right_rotation(mlx);
+		mlx->player.rot_speed = old_rot_speed;
+		mlx_mouse_move(mlx->mlx, mlx->win, mlx->screen.w >> 1, mlx->screen.h >> 1);
+	}
+}
+
 void	movement(t_mlx *mlx)
 {
+	get_mouse_track(mlx);
 	if (mlx->key_tab[KEY_A_INDEX])
 		left_rotation(mlx);
 	if (mlx->key_tab[KEY_W_INDEX])
