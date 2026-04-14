@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:09:33 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 19:14:24 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/14 20:23:56 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static void	move_forward(t_mlx *mlx)
 	t_player	*p;
 
 	p = &mlx->player;
-	if (get_map_id(mlx, (int)(p->pos_x + p->dir_x * p->move_speed),
-		(int)p->pos_y) == MAP_ROOM)
+	if (get_map_id(mlx, (int)(p->pos_x + p->dir_x * (p->move_speed + 0.2)),
+			(int)p->pos_y) == MAP_ROOM)
 		p->pos_x += p->dir_x * p->move_speed;
 	if (get_map_id(mlx, (int)p->pos_x,
-			(int)(p->pos_y + p->dir_y * p->move_speed)) == MAP_ROOM)
+			(int)(p->pos_y + p->dir_y * (p->move_speed + 0.2))) == MAP_ROOM)
 		p->pos_y += p->dir_y * p->move_speed;
 	mlx->screen.need_redraw = true;
 }
@@ -71,32 +71,38 @@ static void	move_backward(t_mlx *mlx)
 	t_player	*p;
 
 	p = &mlx->player;
-	if (get_map_id(mlx, (int)(p->pos_x - p->dir_x * p->move_speed),
-		(int)p->pos_y) == MAP_ROOM)
+	if (get_map_id(mlx, (int)(p->pos_x - p->dir_x * (p->move_speed + 0.2)),
+			(int)p->pos_y) == MAP_ROOM)
 		p->pos_x -= p->dir_x * p->move_speed;
 	if (get_map_id(mlx, (int)p->pos_x,
-			(int)(p->pos_y - p->dir_y * p->move_speed)) == MAP_ROOM)
+			(int)(p->pos_y - p->dir_y * (p->move_speed + 0.2))) == MAP_ROOM)
 		p->pos_y -= p->dir_y * p->move_speed;
 	mlx->screen.need_redraw = true;
 }
 
 static void	get_mouse_track(t_mlx *mlx)
 {
+	static int		old_x = -1;
 	int				x;
 	int				y;
+	int				screen_center;
 	double			old_rot_speed;
 
 	mlx_mouse_get_pos(mlx->mlx, &x, &y);
-	if (x != mlx->screen.w >> 1)
+	if (x == old_x)
+		return ;
+	old_x = x;
+	screen_center = mlx->screen.w >> 1;
+	if (x != screen_center)
 	{
 		old_rot_speed = mlx->player.rot_speed;
-		mlx->player.rot_speed = old_rot_speed * 2;
-		if (x <  mlx->screen.w >> 1)
+		mlx->player.rot_speed = old_rot_speed * 1.3;
+		if (x < screen_center)
 			left_rotation(mlx);
-		else if (x >  mlx->screen.w >> 1)
+		else if (x > screen_center)
 			right_rotation(mlx);
 		mlx->player.rot_speed = old_rot_speed;
-		mlx_mouse_move(mlx->mlx, mlx->win, mlx->screen.w >> 1, mlx->screen.h >> 1);
+		mlx_mouse_move(mlx->mlx, mlx->win, screen_center, mlx->screen.h >> 1);
 	}
 }
 
