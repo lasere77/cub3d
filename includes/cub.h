@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 20:13:00 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/15 14:31:29 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_key_index
 {
 	KEY_ESC_INDEX,
 	KEY_F10_INDEX,
+	KEY_F12_INDEX,
 	KEY_A_INDEX,
 	KEY_W_INDEX,
 	KEY_S_INDEX,
@@ -60,6 +61,8 @@ typedef struct s_screen
 	int				i;
 	int				w;
 	int				h;
+	int				center_x;
+	int				center_h;
 	bool			need_redraw;
 }					t_screen;
 
@@ -112,9 +115,9 @@ typedef struct s_mlx
 	t_ray			ray;
 	t_map			map;
 	struct timeval	start;
+	double			frame_time;
 	bool			key_tab[NB_SET_KEY];
 	int				mlx_fps;
-	double			frame_time;
 }					t_mlx;
 
 void				draw(t_mlx *mlx, int h, int side);

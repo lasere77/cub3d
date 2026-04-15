@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/14 19:10:26 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/15 14:30:48 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	init_component(t_mlx *mlx)
 			mlx->screen.w, mlx->screen.h);
 	if (!mlx->screen.img || !mlx->screen.img_mini_map)
 		panic("Error creating image.", mlx, 1);
-	mlx_mouse_hide(mlx->mlx);
 }
 
 static void	init_window(t_mlx *mlx)
@@ -50,12 +49,13 @@ static void	init_window(t_mlx *mlx)
 	if (!mlx->win)
 		panic("Error creating windows.", mlx, 1);
 	mlx_get_screen_size(mlx->mlx, mlx->win, &mlx->screen.w, &mlx->screen.h);
+	mlx->screen.center_x = mlx->screen.w >> 1;
+	mlx->screen.center_h = mlx->screen.h >> 1;
 	mlx_set_window_size(mlx->mlx, mlx->win, mlx->screen.w, mlx->screen.h);
 	mlx_set_window_position(mlx->mlx, mlx->win, 0, 0);
 	mlx_set_font_scale(mlx->mlx, "default", FONT_SIZE);
 	init_component(mlx);
 	mlx->screen.need_redraw = true;
-	mlx->key_tab[KEY_F10_INDEX] = true;
 }
 
 void	init_mlx(t_mlx *mlx, char *argv)

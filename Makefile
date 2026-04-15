@@ -1,20 +1,21 @@
 CC=cc
 NAME = cub3D
 SRCS_DIR = srcs/
-SOURCES =	cub3d.c						\
-			event/event.c				\
-			event/player_movement.c		\
-			raycasting.c				\
-			error.c						\
-			init_mlx.c					\
-			dda.c						\
-			draw.c						\
-			parsing/get_map.c			\
-			parsing/set_map.c			\
-			parsing/get_scene.c			\
-			parsing/get_ceil_floor.c	\
-			overlay/overlay.c			\
-			parsing/get_texture.c		\
+SOURCES =	cub3d.c							\
+			event/event.c					\
+			event/player_movement.c			\
+			event/player_movement_bonus.c	\
+			raycasting.c					\
+			error.c							\
+			init_mlx.c						\
+			dda.c							\
+			draw.c							\
+			parsing/get_map.c				\
+			parsing/set_map.c				\
+			parsing/get_scene.c				\
+			parsing/get_ceil_floor.c		\
+			overlay/overlay.c				\
+			parsing/get_texture.c
 
 SOURCES	:=	$(addprefix $(SRCS_DIR), $(SOURCES))
 

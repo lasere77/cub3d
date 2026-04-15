@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:47:29 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 14:48:08 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/15 15:11:00 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ void	key_hook_up(int key, void *param)
 		mlx->key_tab[KEY_S_INDEX] = false;
 }
 
+static void	manage_mouse(t_mlx *mlx)
+{
+	const int		center_x = mlx->screen.center_x;
+	const int		center_h = mlx->screen.center_h;
+
+	if (mlx->key_tab[KEY_F12_INDEX])
+		mlx_mouse_show(mlx->mlx);
+	else
+	{
+		mlx_mouse_hide(mlx->mlx);
+		mlx_mouse_move(mlx->mlx, mlx->win, center_x, center_h);
+	}
+	mlx->key_tab[KEY_F12_INDEX] = !mlx->key_tab[KEY_F12_INDEX];
+}
+
 void	key_hook_down(int key, void *param)
 {
 	t_mlx	*mlx;
@@ -48,6 +63,8 @@ void	key_hook_down(int key, void *param)
 		mlx->key_tab[KEY_S_INDEX] = true;
 	else if (key == KEY_F10)
 		mlx->key_tab[KEY_F10_INDEX] = !mlx->key_tab[KEY_F10_INDEX];
+	else if (key == KEY_F12)
+		manage_mouse(mlx);
 }
 
 void	window_hook(int event, void *param)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:10:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/12 14:51:41 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/15 09:00:00 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@
 # include "cub.h"
 
 void	movement(t_mlx *mlx);
+void	left_rotation(t_mlx *mlx);
+void	right_rotation(t_mlx *mlx);
 
 #endif
