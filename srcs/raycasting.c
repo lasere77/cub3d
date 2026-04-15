@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 20:13:33 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/15 17:05:05 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	update(void *param)
 			mlx->screen.h, mlx->screen.w, mlx->screen.buffer);
 		draw_mini_map(mlx);
 		mlx_put_transformed_image_to_window(mlx->mlx, mlx->win, mlx->screen.img,
-		(mlx->screen.w - mlx->screen.h) >> 1,
-		-((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
+			(mlx->screen.w - mlx->screen.h) >> 1,
+			-((mlx->screen.w - mlx->screen.h) >> 1), 1, 1, 90);
 	}
 	if (mlx->key_tab[KEY_F10_INDEX])
 		overlay(mlx);

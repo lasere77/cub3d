@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:06:11 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/11 16:30:17 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/15 16:18:10 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "cub.h"
 
-# define MAP_IDENTIFIERS "01NSWE"
+# define MAP_IDENTIFIERS "01NSWE "
 # define MAP_ERROR "Map have to be the last part and identifiers are \
 0, 1, N, S, W, E"
 

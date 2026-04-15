@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:05:45 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/11 16:30:36 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/15 17:06:39 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "set_map.h"
 
 #include <stddef.h>
+#include <stdio.h>
 
 t_mapid	get_map_id(t_mlx *mlx, size_t w, size_t h)
 {
@@ -49,14 +50,10 @@ static int	linelen(char *scene)
 	int	size;
 
 	size = 0;
-	while (scene[size] && scene[size] != '\n')
-	{
-		while (scene[size] == ' ')
-			size++;
-		if (!ft_strchr(MAP_IDENTIFIERS, scene[size]))
-			return (0);
+	while (scene[size] && ft_strchr(MAP_IDENTIFIERS, scene[size]))
 		size++;
-	}
+	if (scene[size] && scene[size] != '\n' && scene[size] != EOF)
+		return (0);
 	return (size);
 }
 
