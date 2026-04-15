@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:16:38 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 15:47:42 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/15 13:28:58 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ static void	display_player_pos(t_mlx *mlx)
 
 void	overlay(t_mlx *mlx)
 {
+	const float	ratio_x = mlx->map.mini_map.ratio_mini_map_x;
+	const float	ratio_y = mlx->map.mini_map.ratio_mini_map_y;
+
 	display_fps(mlx);
 	display_player_pos(mlx);
 	mlx_put_transformed_image_to_window(mlx->mlx, mlx->win,
-		mlx->screen.img_mini_map,
-		mlx->screen.w - (mlx->map.w * MINI_MAP_SIZE), 0,
-		MINI_MAP_SIZE, MINI_MAP_SIZE, 0);
+		mlx->map.mini_map.img_mini_map,
+		mlx->screen.w - (mlx->map.w * ratio_x), 0,
+		ratio_x, ratio_y, 0);
 }

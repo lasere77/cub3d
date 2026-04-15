@@ -6,7 +6,7 @@
 /*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:40:20 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/14 15:35:14 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/15 13:30:10 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_free_42(t_mlx *mlx)
 {
 	size_t	i;
 
-	free(mlx->screen.buffer_mini_map);
+	free(mlx->map.mini_map.buffer_mini_map);
 	free(mlx->screen.buffer);
 	free(mlx->map.map);
 	i = 0;
@@ -56,8 +56,8 @@ void	panic(char *msg, t_mlx *mlx, int exit_code)
 		destroy_txt(mlx);
 		if (mlx->win)
 			mlx_destroy_window(mlx->mlx, mlx->win);
-		if (mlx->screen.buffer_mini_map)
-			mlx_destroy_image(mlx->mlx, mlx->screen.img_mini_map);
+		if (mlx->map.mini_map.buffer_mini_map)
+			mlx_destroy_image(mlx->mlx, mlx->map.mini_map.img_mini_map);
 		if (mlx->screen.img)
 			mlx_destroy_image(mlx->mlx, mlx->screen.img);
 		if (mlx->mlx)

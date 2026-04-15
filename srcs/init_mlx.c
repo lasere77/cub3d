@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/15 14:30:48 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/15 16:58:29 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,21 @@ static void	init_component(t_mlx *mlx)
 {
 	mlx->screen.buffer = malloc(sizeof(mlx_color)
 			* mlx->screen.w * mlx->screen.h);
-	mlx->screen.buffer_mini_map = malloc(sizeof(mlx_color)
+	mlx->map.mini_map.buffer_mini_map = malloc(sizeof(mlx_color)
 			* mlx->screen.w * mlx->screen.h);
-	if (!mlx->screen.buffer || !mlx->screen.buffer_mini_map)
+	if (!mlx->screen.buffer || !mlx->map.mini_map.buffer_mini_map)
 		panic("Memory alloc failed.\n", mlx, 1);
 	mlx->screen.img = mlx_new_image(mlx->mlx,
 			mlx->screen.h, mlx->screen.w);
-	mlx->screen.img_mini_map = mlx_new_image(mlx->mlx,
+	mlx->map.mini_map.img_mini_map = mlx_new_image(mlx->mlx,
 			mlx->screen.w, mlx->screen.h);
-	if (!mlx->screen.img || !mlx->screen.img_mini_map)
+	if (!mlx->screen.img || !mlx->map.mini_map.img_mini_map)
 		panic("Error creating image.", mlx, 1);
+	mlx->map.mini_map.ratio_mini_map_x = ((20.0 / 100) * mlx->screen.w)
+		/ mlx->map.w;
+	mlx->map.mini_map.ratio_mini_map_y = ((20.0 / 100) * mlx->screen.h)
+		/ mlx->map.h;
+	mlx_mouse_hide(mlx->mlx);
 }
 
 static void	init_window(t_mlx *mlx)

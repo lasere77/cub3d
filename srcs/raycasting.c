@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 10:32:13 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/15 17:05:05 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/15 17:09:18 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
 #include "mlx_extended.h"
 #include "player_movement.h"
 #include "overlay.h"
@@ -55,17 +54,17 @@ static void	draw_mini_map(t_mlx *mlx)
 	while (index < mlx->map.w * mlx->map.h)
 	{
 		if (mlx->map.map[index] == '0')
-			mlx->screen.buffer_mini_map[index] = (mlx_color)
-			{.rgba = 0xFFFFFFFF};
+			mlx->map.mini_map.buffer_mini_map[index] = (mlx_color)
+			{.rgba = 0xFFFFFF80};
 		else if (mlx->map.map[index] == '1')
-			mlx->screen.buffer_mini_map[index] = (mlx_color)
-			{.rgba = 0xFF00FF};
+			mlx->map.mini_map.buffer_mini_map[index] = (mlx_color)
+			{.rgba = 0xFF0080};
 		++index;
 	}
-	mlx->screen.buffer_mini_map[(int)mlx->player.pos_y * mlx->map.w
+	mlx->map.mini_map.buffer_mini_map[(int)mlx->player.pos_y * mlx->map.w
 		+ (int)mlx->player.pos_x] = (mlx_color){.rgba = 0xFF0000FF};
-	mlx_set_image_region(mlx->mlx, mlx->screen.img_mini_map, 0, 0, mlx->map.w,
-		mlx->map.h, mlx->screen.buffer_mini_map);
+	mlx_set_image_region(mlx->mlx, mlx->map.mini_map.img_mini_map, 0, 0,
+		mlx->map.w, mlx->map.h, mlx->map.mini_map.buffer_mini_map);
 }
 
 void	update(void *param)

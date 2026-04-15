@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/15 14:31:29 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/15 16:49:51 by mcolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ typedef struct s_player
 typedef struct s_screen
 {
 	mlx_image		img;
-	mlx_image		img_mini_map;
-	mlx_color		*buffer_mini_map;
 	mlx_color		*buffer;
 	double			last_update;
 	int				wait_second;
@@ -94,10 +92,19 @@ typedef struct s_txt
 	int				is_valid;
 }					t_txt;
 
+typedef struct s_mini_map
+{
+	mlx_image		img_mini_map;
+	mlx_color		*buffer_mini_map;
+	float			ratio_mini_map_x;
+	float			ratio_mini_map_y;
+}					t_mini_map;
+
 typedef struct s_map
 {
 	char			*map;
 	t_txt			txt[4];
+	t_mini_map		mini_map;
 	mlx_color		floor;
 	mlx_color		ceil;
 	size_t			w;
