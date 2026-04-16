@@ -1,5 +1,6 @@
 CC=cc
 NAME = cub3D
+NAME_BONUS = cub3D_bonus
 SRCS_DIR = srcs/
 SOURCES =	cub3d.c							\
 			event/event.c					\
@@ -30,11 +31,17 @@ INCLUDE = -I includes/ -I libft/includes/ -I MacroLibX/includes/
 LIBS = libft/libft.a MacroLibX/libmlx.so
 
 all: $(NAME)
+bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJS)
 	$(MAKE) -j --no-print-directory -C libft/
 	$(MAKE) -j --no-print-directory -C MacroLibX/
 	$(CC) $(OBJS) $(CFLAGS) $(INCLUDE) -lSDL2 -lm $(LIBS) -o $(NAME)
+
+$(NAME_BONUS): $(OBJS)
+	$(MAKE) -j --no-print-directory -C libft/
+	$(MAKE) -j --no-print-directory -C MacroLibX/
+	$(CC) $(OBJS) $(CFLAGS) $(INCLUDE) -lSDL2 -lm $(LIBS) -o $(NAME_BONUS)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(@D)
@@ -52,9 +59,10 @@ fclean: clean
 	$(MAKE) fclean --no-print-directory -C libft/
 	$(MAKE) fclean --no-print-directory -C MacroLibX/
 	rm -rf $(NAME)
+	rm -rf $(NAME_BONUS)
 
 re: fclean all
 
-.PHONY: all fclean clean re gdb
+.PHONY: all fclean clean re gdb bonus
 
 -include $(DEPS)
