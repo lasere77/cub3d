@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:47:29 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/15 15:11:00 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/16 16:45:33 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ void	key_hook_up(int key, void *param)
 		mlx->key_tab[KEY_W_INDEX] = false;
 	else if (key == KEY_S)
 		mlx->key_tab[KEY_S_INDEX] = false;
+	else if (key == KEY_LEFT)
+		mlx->key_tab[KEY_LEFT_INDEX] = false;
+	else if (key == KEY_RIGHT)
+		mlx->key_tab[KEY_RIGHT_INDEX] = false;
 }
 
 static void	manage_mouse(t_mlx *mlx)
@@ -57,6 +61,10 @@ void	key_hook_down(int key, void *param)
 		mlx->key_tab[KEY_A_INDEX] = true;
 	else if (key == KEY_D)
 		mlx->key_tab[KEY_D_INDEX] = true;
+	else if (key == KEY_LEFT)
+		mlx->key_tab[KEY_LEFT_INDEX] = true;
+	else if (key == KEY_RIGHT)
+		mlx->key_tab[KEY_RIGHT_INDEX] = true;
 	else if (key == KEY_W)
 		mlx->key_tab[KEY_W_INDEX] = true;
 	else if (key == KEY_S)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 22:27:39 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/14 15:32:17 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/16 16:17:04 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void	draw_texture(t_mlx *mlx, int side)
 	double	wall_x;
 
 	ray = &mlx->ray;
-	if (side == 0 && ray->ray_dir_x > 0)
-		txt_side = SIDE_EA;
 	if (side == 0 && ray->ray_dir_x < 0)
+		txt_side = SIDE_EA;
+	if (side == 0 && ray->ray_dir_x > 0)
 		txt_side = SIDE_WE;
 	if (side == 1 && ray->ray_dir_y > 0)
 		txt_side = SIDE_NO;

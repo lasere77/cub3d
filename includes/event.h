@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:56:31 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/15 08:52:18 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/16 16:48:12 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define KEY_W 26
 # define KEY_S 22
 # define KEY_D 7
+# define KEY_LEFT 80
+# define KEY_RIGHT 79
 
 void	key_hook_up(int key, void *param);
 void	key_hook_down(int key, void *param);

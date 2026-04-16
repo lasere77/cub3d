@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 10:46:07 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/15 16:58:29 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/16 16:20:51 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	init_component(t_mlx *mlx)
 		/ mlx->map.w;
 	mlx->map.mini_map.ratio_mini_map_y = ((20.0 / 100) * mlx->screen.h)
 		/ mlx->map.h;
-	mlx_mouse_hide(mlx->mlx);
 }
 
 static void	init_window(t_mlx *mlx)

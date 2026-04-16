@@ -15,7 +15,11 @@ In conclusion, cub3D is a remarkable playground to explore the playful practical
 
 - Undertsand the mathematics, applies to raycasting and how to apply it in algorithms.
 
-- Understand [MacroLibX](https://macrolibx.kbz8.me/)
+- Understand [MacroLibX](https://macrolibx.kbz8.me/).
+
+- Basics of [conventionnal commits](https://www.conventionalcommits.org/en/v1.0.0/).
+
+- Basics of [git branch](https://conventional-branch.github.io/).
 
 ## 📜 None of this would have been possible without you. Thank you.
 

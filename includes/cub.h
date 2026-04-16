@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcolin <mcolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 09:59:32 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/15 16:49:51 by mcolin           ###   ########.fr       */
+/*   Updated: 2026/04/16 16:26:26 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef enum e_key_index
 	KEY_W_INDEX,
 	KEY_S_INDEX,
 	KEY_D_INDEX,
+	KEY_LEFT_INDEX,
+	KEY_RIGHT_INDEX,
 	NB_SET_KEY
 }					t_key_index;
 

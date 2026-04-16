@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 16:09:33 by mcolin            #+#    #+#             */
-/*   Updated: 2026/04/15 15:12:01 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/16 16:37:39 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,11 @@ void	movement(t_mlx *mlx)
 	if (mlx->key_tab[KEY_S_INDEX])
 		move_backward(mlx);
 	if (mlx->key_tab[KEY_A_INDEX])
-	{
-		if (mlx->key_tab[KEY_F12_INDEX])
-			strafe_left(mlx);
-		else
-			left_rotation(mlx);
-	}
+		strafe_left(mlx);
 	if (mlx->key_tab[KEY_D_INDEX])
-	{
-		if (mlx->key_tab[KEY_F12_INDEX])
-			strafe_right(mlx);
-		else
-			right_rotation(mlx);
-	}
+		strafe_right(mlx);
+	if (mlx->key_tab[KEY_LEFT_INDEX])
+		left_rotation(mlx);
+	if (mlx->key_tab[KEY_RIGHT_INDEX])
+		right_rotation(mlx);
 }
