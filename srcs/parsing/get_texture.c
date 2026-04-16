@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 18:37:03 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/13 17:21:11 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/16 20:28:54 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static char	*get_path(t_mlx *mlx, char **scene, int i)
 	while (scene[i][start] == ' ')
 		start++;
 	end = start;
-	while (scene[i][end] && scene[i][end] != ' ' && scene[i][end] != '\n')
+	while (scene[i][end] && scene[i][end] != '\n')
 		end++;
 	if (end == start)
 	{
 		ft_free_split(scene);
-		panic("Texture's path empty", mlx, 1);
+		panic("Texture's path not valid", mlx, 1);
 	}
 	path = ft_substr(scene[i], start, end - start);
 	if (!path)

@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 08:25:34 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/13 10:55:34 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/16 20:33:35 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	**get_file_content(t_mlx *mlx, char *argv, int size)
 		scene[i] = temp;
 		i++;
 	}
+	close(fd);
 	return (scene);
 }
 
@@ -53,7 +54,7 @@ char	**get_scene(t_mlx *mlx, char *argv)
 
 	size = ft_strlen(argv);
 	if (size < 5 || ft_strcmp(&argv[size - 4], ".cub"))
-		panic("Please enter a valid .cub scene", NULL, 1);
+		panic("Please enter a valid .cub scene", mlx, 1);
 	nb_lines = get_number_line_file(argv, "\n");
 	if (nb_lines == -1)
 		panic(NULL, mlx, -1);

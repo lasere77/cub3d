@@ -6,7 +6,7 @@
 /*   By: ykolacze <ykolacze@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 20:09:34 by ykolacze          #+#    #+#             */
-/*   Updated: 2026/04/12 19:29:56 by ykolacze         ###   ########.fr       */
+/*   Updated: 2026/04/16 20:58:56 by ykolacze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,47 @@ bool	get_player(t_mlx *mlx, char **scene)
 	return (!have_player);
 }
 
-static int	check_map(t_mlx *mlx)
+static int	check_border(t_mlx *mlx)
 {
 	size_t	h;
 	size_t	w;
+	t_mapid	map_id;
 
 	h = -1;
 	while (++h < mlx->map.h)
 	{
 		w = -1;
-		while (++w < mlx->map.w)
+		while (++w < mlx->map.w && (h == 0 || h == (mlx->map.h - 1)))
+		{
+			map_id = get_map_id(mlx, w, h);
+			if (map_id != MAP_VOID && map_id != MAP_WALL)
+				return (1);
+		}
+		if ((h != 0 && h != (mlx->map.h - 1)))
+		{
+			map_id = get_map_id(mlx, 0, h);
+			if (map_id != MAP_VOID && map_id != MAP_WALL)
+				return (1);
+			map_id = get_map_id(mlx, (mlx->map.w - 1), h);
+			if (map_id != MAP_VOID && map_id != MAP_WALL)
+				return (1);
+		}
+	}
+	return (0);
+}
+
+static int	check_map(t_mlx *mlx)
+{
+	size_t	h;
+	size_t	w;
+
+	if (check_border(mlx))
+		return (1);
+	h = 0;
+	while (++h < (mlx->map.h - 1))
+	{
+		w = 0;
+		while (++w < (mlx->map.w - 1))
 		{
 			if (get_map_id(mlx, w, h) != MAP_ROOM)
 				continue ;
